@@ -1,0 +1,15 @@
+{
+  "name": "umuts-visualization-skills",
+  "description": "Claude Code skills that turn text into visual HTML pages.",
+  "owner": {
+    "name": "Umut Mete",
+    "url": "https://github.com/umutmete1"
+  },
+  "plugins": [
+    {
+      "name": "umuts-visualization-skills",
+      "source": "./",
+      "description": "teach-visual (interactive HTML lessons) and visual-review (review long docs visually in the browser)."
+    }
+  ]
+}

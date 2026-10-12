@@ -1,0 +1,13 @@
+{
+  "name": "umuts-visualization-skills",
+  "description": "Two Claude Code skills that turn text into visual HTML pages: teach-visual builds an interactive lesson on any topic, visual-review turns a long plan or spec into a short page you can comment on in the browser.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Umut Mete",
+    "url": "https://github.com/umutmete1"
+  },
+  "homepage": "https://github.com/umutmete1/umuts-visualization-skills",
+  "repository": "https://github.com/umutmete1/umuts-visualization-skills",
+  "license": "MIT",
+  "keywords": ["skills", "visualization", "html", "review", "learning"]
+}

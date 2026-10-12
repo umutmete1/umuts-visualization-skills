@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add login to the app</title>
+  <link rel="stylesheet" href="/_vr/base.css">
+</head>
+<body>
+<main class="vr-page">
+  <header class="vr-header">
+    <h1>Add login to the app</h1>
+    <p class="vr-meta">Source: test/sample/plan.md · 4 phases · ~9 days</p>
+  </header>
+
+  <section class="tldr" data-vr-section="TL;DR">
+    <h2>TL;DR</h2>
+    <ul>
+      <li>Email + password sign-in so saved trades sync across devices; guests keep working.</li>
+      <li>4 phases, about 9 days: backend first, then screens, then guest-data migration.</li>
+      <li>Biggest risk: duplicated trades when migrating guest data.</li>
+      <li>Two open questions: Google sign-in, and how long "remember me" lasts.</li>
+    </ul>
+  </section>
+
+  <section data-vr-section="Phases">
+    <h2>Phases</h2>
+    <ol class="steps">
+      <li><b>Accounts</b> <span class="badge">2 days</span><br>Users table, argon2 password hashing, sign-up endpoint.</li>
+      <li><b>Sessions</b> <span class="badge">2 days</span><br>Login endpoint, HttpOnly session cookies, logout.</li>
+      <li><b>Screens</b> <span class="badge">3 days</span><br>Login and sign-up screens, "remember me".</li>
+      <li><b>Guest data</b> <span class="badge">2 days</span><br>Move guest data into the new account on first login.</li>
+    </ol>
+  </section>
+
+  <section data-vr-section="Login flow">
+    <h2>Login flow</h2>
+    <div class="flow">
+      <div class="node">Email + password</div><span class="arrow"></span>
+      <div class="node">Server checks hash</div><span class="arrow"></span>
+      <div class="node">HttpOnly session cookie</div><span class="arrow"></span>
+      <div class="node">Load saved trades</div>
+    </div>
+  </section>
+
+  <section data-vr-section="Risks">
+    <h2>Risks</h2>
+    <div class="cards">
+      <div class="card"><h3>Guest data migration <span class="badge warn">high</span></h3><p>Logging in on two devices at once could duplicate trades. Migration must be idempotent.</p></div>
+      <div class="card"><h3>No password reset <span class="badge warn">medium</span></h3><p>Out of scope until phase 5 — users who forget their password are stuck.</p></div>
+      <div class="card"><h3>Password guessing <span class="badge good">planned</span></h3><p>Rate limit <code>/login</code> to 5 attempts per minute per IP.</p></div>
+    </div>
+  </section>
+
+  <section data-vr-section="Open questions">
+    <h2>Open questions</h2>
+    <div class="callout info">
+      <p><b>Google sign-in</b> in the first version?</p>
+      <p><b>"Remember me"</b> lifetime: 30 or 90 days?</p>
+    </div>
+  </section>
+
+  <section data-vr-section="Full task list">
+    <details>
+      <summary>All 10 tasks</summary>
+      <table>
+        <tr><th>#</th><th>Task</th><th>Phase</th></tr>
+        <tr><td>1</td><td>Create <code>users</code> table</td><td>1</td></tr>
+        <tr><td>2</td><td>argon2 hashing helper with tests</td><td>1</td></tr>
+        <tr><td>3</td><td><code>POST /signup</code></td><td>1</td></tr>
+        <tr><td>4</td><td><code>POST /login</code></td><td>2</td></tr>
+        <tr><td>5</td><td><code>POST /logout</code></td><td>2</td></tr>
+        <tr><td>6</td><td>Session middleware</td><td>2</td></tr>
+        <tr><td>7</td><td>Login and sign-up screens</td><td>3</td></tr>
+        <tr><td>8</td><td>"Remember me" checkbox</td><td>3</td></tr>
+        <tr><td>9</td><td>Idempotent guest-data migration</td><td>4</td></tr>
+        <tr><td>10</td><td>Rate limit <code>/login</code></td><td>4</td></tr>
+      </table>
+    </details>
+  </section>
+</main>
+</body>
+</html>
